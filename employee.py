@@ -27,9 +27,9 @@ except Exception as e:
 # ---- Define feature names ----
 # IMPORTANT: Update this list to EXACTLY match the features used during training
 FEATURES = [
-    "feature_1",
-    "feature_2",
-    "feature_3",
+    "NAMES",
+    "OREDER",
+    "COUNT",
 ]
 
 st.subheader("Input Features")
@@ -67,5 +67,6 @@ if st.button("Predict"):
 # pandas
 # numpy
 # scikit-learn
+
 
 
