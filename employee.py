@@ -14,7 +14,7 @@ st.write("Enter feature values and get a prediction")
 # ---- Load model ----
 @st.cache_resource
 def load_model():
-    with open("logistic_regression_model.pkl", "rb") as f:
+    with open("logistic_regression_model (1).pkl", "rb") as f:
         model = pickle.load(f)
     return model
 
@@ -67,3 +67,4 @@ if st.button("Predict"):
 # pandas
 # numpy
 # scikit-learn
+
