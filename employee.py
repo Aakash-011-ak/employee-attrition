@@ -8,7 +8,7 @@ import numpy as np
 
 st.set_page_config(page_title="ML Prediction App", layout="centered")
 
-st.title("Logistic Regression Prediction")
+st.title("EMPLOYEE ATTRITION")
 st.write("Enter feature values and get a prediction")
 
 # ---- Load model ----
@@ -67,4 +67,5 @@ if st.button("Predict"):
 # pandas
 # numpy
 # scikit-learn
+
 
