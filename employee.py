@@ -28,7 +28,7 @@ except Exception as e:
 # IMPORTANT: Update this list to EXACTLY match the features used during training
 FEATURES = [
     "NAMES",
-    "OREDER",
+    "ORDER",
     "COUNT",
 ]
 
@@ -67,6 +67,7 @@ if st.button("Predict"):
 # pandas
 # numpy
 # scikit-learn
+
 
 
 
