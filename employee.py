@@ -7,7 +7,7 @@ import pandas as pd
 
 st.set_page_config(page_title="ML Prediction App", layout="centered")
 
-st.title("Logistic Regression Prediction App")
+st.title("EMPLOYEE ATTRITION APP")
 st.write("Enter values for all features and get a prediction")
 
 # ---- Load model ----
@@ -68,4 +68,5 @@ if st.button("Predict"):
 # streamlit
 # pandas
 # scikit-learn
+
 
