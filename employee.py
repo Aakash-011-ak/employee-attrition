@@ -1,15 +1,14 @@
 # ============================
-# app.py
+# app.py (FULL CORRECTED VERSION)
 # ============================
 import streamlit as st
 import pickle
 import pandas as pd
-import numpy as np
 
 st.set_page_config(page_title="ML Prediction App", layout="centered")
 
-st.title("EMPLOYEE ATTRITION")
-st.write("Enter feature values and get a prediction")
+st.title("Logistic Regression Prediction App")
+st.write("Enter values for all features and get a prediction")
 
 # ---- Load model ----
 @st.cache_resource
@@ -21,43 +20,46 @@ def load_model():
 try:
     model = load_model()
 except Exception as e:
-    st.error(f"Error loading model: {e}")
+    st.error(f"❌ Error loading model: {e}")
     st.stop()
 
-# ---- Define feature names ----
-# IMPORTANT: Update this list to EXACTLY match the features used during training
-FEATURES = [
-    "NAMES",
-    "ORDER",
-    "COUNT",
-]
+# ---- Get feature names EXACTLY as used during training ----
+if hasattr(model, "feature_names_in_"):
+    FEATURES = list(model.feature_names_in_)
+else:
+    st.error("❌ Model does not contain feature names. Retrain using pandas DataFrame.")
+    st.stop()
 
 st.subheader("Input Features")
 
+# ---- User input ----
 input_data = {}
 for feature in FEATURES:
-    input_data[feature] = st.number_input(f"{feature}", value=0.0)
+    input_data[feature] = st.number_input(
+        label=feature,
+        value=0.0,
+        format="%.2f"
+    )
 
-input_df = pd.DataFrame([input_data])
+# ---- Create DataFrame in SAME order ----
+input_df = pd.DataFrame([input_data], columns=FEATURES)
 
-st.write("### Input Data")
+st.write("### Input Data Sent to Model")
 st.dataframe(input_df)
 
 # ---- Prediction ----
 if st.button("Predict"):
     try:
         prediction = model.predict(input_df)
+        st.success(f"✅ Prediction: {prediction[0]}")
 
         if hasattr(model, "predict_proba"):
             probability = model.predict_proba(input_df)
-            st.success(f"Prediction: {prediction[0]}")
-            st.write("Prediction Probability:")
+            st.write("### Prediction Probability")
             st.write(probability)
-        else:
-            st.success(f"Prediction: {prediction[0]}")
 
     except Exception as e:
-        st.error(f"Prediction failed: {e}")
+        st.error(f"❌ Prediction failed: {e}")
 
 
 # ============================
@@ -65,9 +67,5 @@ if st.button("Predict"):
 # ============================
 # streamlit
 # pandas
-# numpy
 # scikit-learn
-
-
-
 
